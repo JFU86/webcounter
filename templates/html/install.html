@@ -1,0 +1,122 @@
+<div style="text-align:center;">
+	<h1>Installation</h1>
+</div>
+
+<div class="install">
+<table style="width:100%;">
+	<tr>
+		<th class="login" colspan="2">Installation requirements</th>
+	</tr>
+	<tr>
+		<td class="login"><b>PHP &gt;= 5.3.3</b></td>
+		<td class="login"><img src="templates/img/{img_phpversion}" alt="process" /> {phpversion}</td>
+	</tr>
+	<tr>
+		<td class="login"><b>PHP "safe_mode" = Off</b></td>
+		<td class="login"><img src="templates/img/{img_safemode}" alt="process" /> {safemode}</td>
+	</tr>
+	<tr>
+		<td class="login"><b>Files writable (CHMOD)</b><br />
+		<img src="templates/{templateName}/img/b_tipp.png" width="16" height="16" alt="tip" /> The base folder, /system and all its subfolders must be writable!</td>
+		<td class="login" style="width:70px;"><img src="templates/img/{img_writable}" alt="process" /> {writable}</td>
+	</tr>
+</table>
+</div>
+
+<br />
+
+<div class="install" id="admin_registration">
+	
+	<form action="install.php" method="post">
+	<input type="hidden" name="noheader" value="true" />
+	<table style="width:100%;">
+		<tr>
+			<th class="login" colspan="2">Configuration</th>
+		</tr>
+ 		<tr style="display:none;">
+			<td class="login">Administrator Name:</td>
+			<td class="login"><input type="text" name="username" value="admin" autocomplete="off" style="width:220px;" /></td>
+		</tr>
+		<tr style="display:none;">
+			<td class="login">Administrator Password:</td>
+			<td class="login"><input type="password" name="pass0" value="admin" autocomplete="off" style="width:220px;" /></td>
+		</tr>
+		<tr style="display:none;">
+			<td class="login">Retype Password:</td>
+			<td class="login"><input type="password" name="pass1" value="admin" autocomplete="off" style="width:220px;" /></td>
+		</tr>
+		<tr>
+			<td class="login">Database:</td>
+			<td class="login">
+				<select id="database" name="database" style="width:224px;">
+					{option_sqlite3}
+					{option_mysql}
+				</select>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="login">Time format:</td>
+			<td class="login">
+				<select name="timeformat" style="width:224px;">
+					<option value="d.m.Y H:i">31.01.2013 23:20</option>
+					<option value="Y-m-d H:i">2013-01-31 23:20</option>
+					<option value="Y-m-d h:i a">2013-01-31 11:20 pm</option>
+					<option value="m.d.Y h:i a">01.31.2013 11:20 pm</option>
+					<option value="m/d/Y h:i a">01/31/2013 11:20 pm</option>
+					<option value="d/m/Y h:i a">31/01/2013 11:20 pm</option>					
+				</select>
+			</td>
+		</tr>
+		
+		<tr id="databaseConfiguration0">
+			<th class="login" colspan="2">Database Configuration</th>
+		</tr>
+		<tr id="databaseConfiguration1">
+			<td class="login">Database Hostname:</td>
+			<td class="login"><input type="text" name="db_hostname" value="localhost" autocomplete="off" style="width:220px;" /></td>
+		</tr>		
+		<tr id="databaseConfiguration2">
+			<td class="login">Database Name:</td>
+			<td class="login"><input type="text" name="db_database" autocomplete="off" style="width:220px;" /></td>
+		</tr>		
+		<tr id="databaseConfiguration3">
+			<td class="login">Database Username:</td>
+			<td class="login"><input type="text" name="db_username" autocomplete="off" style="width:220px;" /></td>
+		</tr>		
+		<tr id="databaseConfiguration4">
+			<td class="login">Database Password:</td>
+			<td class="login"><input type="password" name="db_userpass" autocomplete="off" style="width:220px;" /></td>
+		</tr>		
+		<tr id="databaseConfiguration5">
+			<td class="login">Database Port:</td>
+			<td class="login"><input type="text" name="db_port" autocomplete="off" style="width:220px;" value="3306" /></td>
+		</tr>		
+		<tr id="databaseConfiguration6">
+			<td class="login">Database Socket:</td>
+			<td class="login"><input type="text" name="db_socket" autocomplete="off" style="width:220px;" /></td>
+		</tr>
+	
+		<tr>
+			<td class="login" colspan="2" style="text-align:right;"><input id="submit" name="submit" type="submit" value="install" /></td>
+		</tr>
+	</table>
+	</form>
+</div>
+<br />
+{script}
+<script>
+	function showDatabaseConfiguration()
+	{
+		for (var i = 0; i < 7; i++) {
+			$('databaseConfiguration' + i).style.display = 'table-row';
+		}
+	}
+	function hideDatabaseConfiguration()
+	{
+		for (var i = 0; i < 7; i++) {
+			$('databaseConfiguration' + i).style.display = 'none';
+		}
+	}
+	window.addEvent('domready', function() { if ($('database').value == 'Sqlite' || $('database').value == '') { hideDatabaseConfiguration(); }});
+</script>
